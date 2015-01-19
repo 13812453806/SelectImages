@@ -45,7 +45,7 @@ public class ImageDirActivity extends ImageBaseActivity implements LoaderManager
                 Dir dir = (Dir) parent.getItemAtPosition(position);
                 if (dir != null)
                 {
-                    Intent intent = new Intent(getApplicationContext(), ImagesActivity.class);
+                    Intent intent = new Intent(ImageDirActivity.this, ImagesActivity.class);
                     intent.putExtra(ImagesActivity.ARG_DIR_ID, dir.id);
                     intent.putExtra(ImagesActivity.ARG_DIR_NAME, dir.name);
                     intent.putExtra(Constan.ARG_PHOTO_LIST, checkList);
@@ -94,7 +94,7 @@ public class ImageDirActivity extends ImageBaseActivity implements LoaderManager
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
     {
-        return new CursorLoader(getApplicationContext(),
+        return new CursorLoader(this,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                 new String[]{
                                         "count(1) length",
@@ -141,7 +141,7 @@ public class ImageDirActivity extends ImageBaseActivity implements LoaderManager
                 list.add(dir);
             }
 
-            ImageDirAdapter adapter = new ImageDirAdapter(getApplicationContext(), list);
+            ImageDirAdapter adapter = new ImageDirAdapter(this, list);
             mListView.setAdapter(adapter);
         }
         else

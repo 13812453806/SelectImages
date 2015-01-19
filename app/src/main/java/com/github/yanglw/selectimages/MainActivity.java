@@ -43,12 +43,12 @@ public class MainActivity extends ActionBarActivity
         mTextView.setText(getString(R.string.check_length, 0));
 
         mList = new ArrayList<Photo>();
-        mAdapter = new MainAdapter(getApplicationContext(), mList);
+        mAdapter = new MainAdapter(this, mList);
         gridView.setAdapter(mAdapter);
 
         if (!ImageLoader.getInstance().isInited())
         {
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                     .threadPriority(Thread.NORM_PRIORITY - 2)
                     .threadPoolSize(3)
                     .denyCacheImageMultipleSizesInMemory()
@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
         if (id == R.id.add)
         {
-            Intent intent = new Intent(getApplicationContext(), ImageDirActivity.class);
+            Intent intent = new Intent(this, ImageDirActivity.class);
             intent.putExtra(Constan.ARG_PHOTO_LIST, mList);
             startActivityForResult(intent, 1);
             return true;

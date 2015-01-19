@@ -59,9 +59,9 @@ public class ImagesActivity extends ImageBaseActivity implements LoaderManager.L
 
                 if (!checkList.contains(photo))
                 {
-                    if (checkList.size() >= Constan.MAX_SIZE)
+                    if (checkList.size() >= Constan.MAX_SIZE && Constan.MAX_SIZE >= 0)
                     {
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(ImagesActivity.this,
                                        getString(R.string.tip_max_size, Constan.MAX_SIZE),
                                        Toast.LENGTH_SHORT)
                              .show();
@@ -119,7 +119,7 @@ public class ImagesActivity extends ImageBaseActivity implements LoaderManager.L
         int id = item.getItemId();
         if (id == R.id.preview)
         {
-            startActivityForResult(new Intent(getApplicationContext(), PreviewActivity.class), 1);
+            startActivityForResult(new Intent(this, PreviewActivity.class), 1);
             return true;
         }
         if (id == R.id.num)
@@ -149,7 +149,7 @@ public class ImagesActivity extends ImageBaseActivity implements LoaderManager.L
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
     {
-        return new CursorLoader(getApplicationContext(),
+        return new CursorLoader(this,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                 new String[]{
                                         MediaStore.Images.Media.DATA//图片地址
@@ -176,7 +176,7 @@ public class ImagesActivity extends ImageBaseActivity implements LoaderManager.L
                 list.add(photo);
             }
 
-            mAdapter = new ImagesAdapter(getApplicationContext(), list, checkList);
+            mAdapter = new ImagesAdapter(this, list, checkList);
             mGridView.setAdapter(mAdapter);
         }
         else

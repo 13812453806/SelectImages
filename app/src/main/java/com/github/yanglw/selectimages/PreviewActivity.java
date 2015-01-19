@@ -87,12 +87,7 @@ public class PreviewActivity extends ImageBaseActivity
                 mCancelList.remove(photo);
             }
 
-            mIsCheck = !mIsCheck;
-
-            if (Build.VERSION.SDK_INT >= 11)
-            {
-                invalidateOptionsMenu();
-            }
+            refreshMenuItem();
 
             setResult(Constan.RESULT_CHANGE);
             return true;
